@@ -20,7 +20,6 @@ export default function NavSelect({ onChange }: { onChange: (value: string) => v
           <SelectItem value="#experience">Work Experience</SelectItem>
           <SelectItem value="#education">Education</SelectItem>
           <SelectItem value="#skills">Skills</SelectItem>
-          <SelectItem value="#projects">Projects</SelectItem>
         </SelectContent>
       </Select>
     </div>
