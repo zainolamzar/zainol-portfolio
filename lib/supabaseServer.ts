@@ -12,12 +12,6 @@ export async function createClient() {
         get(name: string) {
           return cookieStore.get(name)?.value
         },
-        set(name: string, value: string, options: any) {
-          // no-op: server can't set cookies
-        },
-        remove(name: string, options: any) {
-          // no-op: server can't remove cookies
-        },
       },
     }
   )
