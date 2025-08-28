@@ -8,7 +8,7 @@ import Image from "next/image";
 type CardData = {
   title: string;
   src: string;
-  href: string; // slug-based link (e.g. `/projects/[slug]` or `/blogs/[slug]`)
+  href: string; // slug-based link
   description?: string;
   tech_stack?: string[];
   date?: string; // for blogs

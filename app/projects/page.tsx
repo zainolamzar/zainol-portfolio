@@ -1,7 +1,5 @@
 import { createClient } from "@/lib/supabaseServer"
 import { FocusCards } from "@/components/ui/focus-cards"
-import Image from "next/image"
-import Link from "next/link"
 
 type Project = {
   id: number
