@@ -20,18 +20,18 @@ export const AdminSidebar = () => {
   ]
 
   const resumeLinks = [
-    { label: "About", href: "/admin/resume#about", icon: <FaUser /> },
-    { label: "Work Experience", href: "/admin/resume#experience", icon: <FaBriefcase /> },
-    { label: "Education", href: "/admin/resume#education", icon: <FaGraduationCap /> },
-    { label: "Skill", href: "/admin/resume#skills", icon: <FaTools /> },
+    { label: "About", href: "/config/resume#about", icon: <FaUser /> },
+    { label: "Work Experience", href: "/config/resume#experience", icon: <FaBriefcase /> },
+    { label: "Education", href: "/config/resume#education", icon: <FaGraduationCap /> },
+    { label: "Skill", href: "/config/resume#skills", icon: <FaTools /> },
   ]
 
   const projectLinks = [
-    { label: "Projects", href: "/admin/project", icon: <FaProjectDiagram /> },
+    { label: "Projects", href: "/config/project", icon: <FaProjectDiagram /> },
   ]
 
   const blogLinks = [
-    { label: "Blogs", href: "/admin/blog", icon: <FaBlog /> },
+    { label: "Blogs", href: "/config/blog", icon: <FaBlog /> },
   ]
 
   const logoSrc = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profiles/logo.png`
