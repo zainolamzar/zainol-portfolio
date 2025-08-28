@@ -32,7 +32,7 @@ export default function MainApp({
       {/* Right column */}
       <section className="md:col-span-2 h-full">
         <RightColumn
-          profile={{ bio: profile.bio }}
+          profile={profile}
           experience={experience}
           education={education}
           skill={skill}
