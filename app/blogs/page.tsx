@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabaseServer"
+import { FocusCards } from "@/components/ui/focus-cards";
 import Image from "next/image"
 import Link from "next/link"
 
@@ -45,35 +46,17 @@ export default async function BlogsPage() {
 
   return (
     <div className="p-8">
-      <h1 className="text-4xl font-bold mb-6">Blogs</h1>
+      <h1 className="text-4xl font-bold mb-6 text-center">Blogs</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-        {blogs?.map((blog: Blog) => {
-            const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${blog.image_url}`
-
-          return (
-            <Link
-              key={blog.id}
-              href={`/blogs/${blog.slug}`}
-              className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition"
-            >
-                <div className="relative w-full h-48">
-                    <Image
-                        src={imageUrl}
-                        alt={blog.title}
-                        fill
-                        className="object-cover"
-                    />
-                </div>
-
-              <div className="p-4">
-                <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
-                <p className="text-gray-500 text-sm">{formatDate(blog.created_at)}</p>
-              </div>
-            </Link>
-          )
-        })}
-      </div>
+      <FocusCards
+        cards={blogs.map((blog) => ({
+          title: blog.title,
+          src: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${blog.image_url}`,
+          href: `/blogs/${blog.slug}`,
+          description: blog.content,
+          date: formatDate(blog.created_at), // e.g. "Sunday, 28 Aug 2025"
+        }))}
+      />
     </div>
   )
 }
