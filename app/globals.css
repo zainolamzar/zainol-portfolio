@@ -127,3 +127,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+.preserve-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotateY(0deg) rotateX(10deg);
+  }
+  to {
+    transform: rotateY(360deg) rotateX(10deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
+
+
