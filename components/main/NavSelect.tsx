@@ -16,7 +16,7 @@ export default function NavSelect({ onChange }: { onChange: (value: string) => v
         <SelectTrigger
           className="w-full rounded-xl border border-[#000b1f] 
                      bg-[rgb(25,26,28)] text-[#dfe4ed] 
-                     shadow-md hover:bg-[#000b1f] 
+                     shadow-md hover:bg-[rgb(1,1,1)] 
                      transition-colors duration-300"
         >
           <SelectValue placeholder="Navigate to..." />

@@ -8,7 +8,7 @@ export function FocusCardsSkeleton({ count = 3 }: { count?: number }) {
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className="rounded-xl relative bg-gray-100 dark:bg-neutral-900 overflow-hidden w-full shadow-md"
+          className="rounded-xl relative opacity-20 bg-[rgb(88,88,88)] dark:bg-neutral-900 overflow-hidden w-full shadow-md"
         >
           {/* Match Card's 16:9 ratio */}
           <div className="relative w-full aspect-video">
