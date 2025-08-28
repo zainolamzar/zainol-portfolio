@@ -42,8 +42,8 @@ export default function RightColumn({
   }
 
   return (
-    <ScrollArea className="h-[calc(100vh-4rem)] w-full rounded-md border p-6">
-      <div className="w-full">{renderSection()}</div>
-    </ScrollArea>
+    <div className="h-full flex flex-col overflow-hidden">
+      {renderSection()}
+    </div>
   )
 }

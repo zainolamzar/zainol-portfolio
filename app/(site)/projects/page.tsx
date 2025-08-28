@@ -1,7 +1,5 @@
 import { createClient } from "@/lib/supabaseServer"
 import { FocusCards } from "@/components/ui/focus-cards"
-import Image from "next/image"
-import Link from "next/link"
 
 type Project = {
   id: number
@@ -30,10 +28,13 @@ export default async function ProjectsPage() {
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold mb-6 text-center">Projects</h1>
+    <div className="min-h-screen bg-[rgb(25,26,28)] text-[#dfe4ed] p-8">
+      {/* Page Header */}
+      <h1 className="text-5xl font-extrabold text-center mb-12 tracking-wide">
+        Projects
+      </h1>
 
-      {/* Apply focus effect on cards */}
+      {/* Projects Cards */}
       <FocusCards
         cards={projects.map((project) => ({
           title: project.title,
@@ -43,6 +44,11 @@ export default async function ProjectsPage() {
           tech_stack: project.tech_stack,
         }))}
       />
+
+      {/* Optional footer */}
+      <footer className="mt-16 text-center text-[#dfe4ed]/50 text-sm">
+        © {new Date().getFullYear()} Zainol Amzar's Portfolio
+      </footer>
     </div>
   )
 }
