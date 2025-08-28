@@ -29,7 +29,7 @@ export default function RightColumn({
   const renderSection = () => {
     switch (selectedSection) {
       case "#about":
-        return <AboutCard about={{ bio: profile.bio }} />
+        return <AboutCard about={profile} />
       case "#experience":
         return <ExperienceCard experience={experience} />
       case "#skills":
