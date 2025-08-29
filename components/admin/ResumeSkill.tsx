@@ -42,7 +42,6 @@ export default function ResumeSkill() {
 
   useEffect(() => {
     fetchSkills()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const beginEdit = (sk: Skill) => {

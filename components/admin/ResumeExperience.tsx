@@ -65,7 +65,6 @@ export default function ResumeExperience() {
 
   useEffect(() => {
     fetchExperiences()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const beginEdit = (exp: Experience) => {

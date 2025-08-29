@@ -62,7 +62,6 @@ export default function ResumeEducation() {
 
   useEffect(() => {
     fetchEducation()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const beginEdit = (ed: Education) => {
