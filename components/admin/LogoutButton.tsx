@@ -2,18 +2,23 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useSidebar } from "@/components/ui/sidebar"
+import { FaSignOutAlt } from "react-icons/fa"
 
 export default function LogoutButton() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const { open } = useSidebar()
 
   const handleLogout = async () => {
     setLoading(true)
     try {
       await fetch("/api/logout", { method: "POST" })
-      router.push("/config") // redirect to login
+      router.push("/config")
     } catch (err) {
       console.error("Logout failed", err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -21,9 +26,12 @@ export default function LogoutButton() {
     <button
       onClick={handleLogout}
       disabled={loading}
-      className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+      className={`flex items-center justify-center gap-2 rounded-lg bg-red-600 hover:bg-red-700 transition-all duration-200
+        ${open ? "w-full px-4 py-2 justify-start" : "w-12 h-12"}
+      `}
     >
-      {loading ? "Logging out..." : "Logout"}
+      <FaSignOutAlt className="text-white text-lg" />
+      {open && <span className="text-white font-medium">{loading ? "Logging out..." : "Logout"}</span>}
     </button>
   )
 }

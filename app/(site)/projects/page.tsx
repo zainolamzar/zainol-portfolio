@@ -34,20 +34,26 @@ export default async function ProjectsPage() {
         Projects
       </h1>
 
-      {/* Projects Cards */}
-      <FocusCards
-        cards={projects.map((project) => ({
-          title: project.title,
-          src: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${project.image_url}`,
-          href: `/projects/${project.slug}`,
-          description: project.description,
-          tech_stack: project.tech_stack,
-        }))}
-      />
+      {/* Projects Cards OR Empty State */}
+      {projects.length > 0 ? (
+        <FocusCards
+          cards={projects.map((project) => ({
+            title: project.title,
+            src: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${project.image_url}`,
+            href: `/projects/${project.slug}`,
+            description: project.description,
+            tech_stack: project.tech_stack,
+          }))}
+        />
+      ) : (
+        <p className="text-center text-lg text-gray-400">
+          No projects developed yet. <span className="italic">Stay tuned!</span>
+        </p>
+      )}
 
-      {/* Optional footer */}
+      {/* Footer */}
       <footer className="mt-16 text-center text-[#dfe4ed]/50 text-sm">
-        © {new Date().getFullYear()} Zainol Amzar's Portfolio
+        © {new Date().getFullYear()} Zainol Amzar&apos;s Portfolio
       </footer>
     </div>
   )

@@ -8,6 +8,7 @@ type Blog = {
   content: string
   image_url: string
   created_at: string
+  published: boolean
 }
 
 // Helper function to format date
@@ -32,6 +33,7 @@ export default async function BlogsPage() {
   const { data: blogs, error } = await supabase
     .from("posts")
     .select("*")
+    .eq("published", true) // ✅ Only published blogs
     .order("created_at", { ascending: false })
 
   if (error) return <p className="text-red-600">Failed to load blogs: {error.message}</p>
@@ -43,18 +45,24 @@ export default async function BlogsPage() {
         Blogs
       </h1>
 
-      {/* Blog Cards */}
-      <FocusCards
-        cards={blogs.map((blog) => ({
-          title: blog.title,
-          src: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${blog.image_url}`,
-          href: `/blogs/${blog.slug}`,
-          description: blog.content,
-          date: formatDate(blog.created_at),
-        }))}
-      />
+      {/* Blog Cards OR Empty State */}
+      {blogs.length > 0 ? (
+        <FocusCards
+          cards={blogs.map((blog) => ({
+            title: blog.title,
+            src: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${blog.image_url}`,
+            href: `/blogs/${blog.slug}`,
+            description: blog.content,
+            date: formatDate(blog.created_at),
+          }))}
+        />
+      ) : (
+        <p className="text-center text-lg text-gray-400">
+          No posts published yet. <span className="italic">Stay tuned!</span>
+        </p>
+      )}
 
-      {/* Optional: Footer */}
+      {/* Footer */}
       <footer className="mt-16 text-center text-[#dfe4ed]/50 text-sm">
         © {new Date().getFullYear()} Exclusively By Zainol Amzar
       </footer>

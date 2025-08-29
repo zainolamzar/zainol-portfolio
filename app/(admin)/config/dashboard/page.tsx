@@ -1,6 +1,5 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import LogoutButton from "@/components/admin/LogoutButton"
 
 export default async function DashboardPage() {
   const token = (await cookies()).get("admin_token")?.value
@@ -13,7 +12,6 @@ export default async function DashboardPage() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
       <p className="mb-6">Welcome! You are logged in.</p>
-      <LogoutButton />
     </div>
   )
 }
