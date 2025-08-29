@@ -9,6 +9,7 @@ import {
   useMotionValue,
   useSpring,
   useTransform,
+  MotionValue,
 } from "motion/react"
 import { useRef, useState } from "react"
 
@@ -21,7 +22,7 @@ export default function NavBar() {
     { label: "Blogs", href: "/blogs", icon: <FaBlog /> },
   ]
 
-  let mouseX = useMotionValue(Infinity)
+  const mouseX = useMotionValue(Infinity)
 
   return (
     <motion.nav
@@ -55,27 +56,27 @@ function DockIcon({
   label: string
   icon: React.ReactNode
   active: boolean
-  mouseX: any
+  mouseX: MotionValue<number>
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [hovered, setHovered] = useState(false)
 
-  let distance = useTransform(mouseX, (val) => {
-    let bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 }
+  const distance = useTransform(mouseX, (val: number) => {
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 }
     return val - bounds.x - bounds.width / 2
   })
 
-  let widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
-  let heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
+  const widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
+  const heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40])
 
-  let widthIcon = useTransform(distance, [-150, 0, 150], [20, 36, 20])
-  let heightIcon = useTransform(distance, [-150, 0, 150], [20, 36, 20])
+  const widthIcon = useTransform(distance, [-150, 0, 150], [20, 36, 20])
+  const heightIcon = useTransform(distance, [-150, 0, 150], [20, 36, 20])
 
-  let width = useSpring(widthTransform, { mass: 0.1, stiffness: 150, damping: 12 })
-  let height = useSpring(heightTransform, { mass: 0.1, stiffness: 150, damping: 12 })
+  const width = useSpring(widthTransform, { mass: 0.1, stiffness: 150, damping: 12 })
+  const height = useSpring(heightTransform, { mass: 0.1, stiffness: 150, damping: 12 })
 
-  let widthI = useSpring(widthIcon, { mass: 0.1, stiffness: 150, damping: 12 })
-  let heightI = useSpring(heightIcon, { mass: 0.1, stiffness: 150, damping: 12 })
+  const widthI = useSpring(widthIcon, { mass: 0.1, stiffness: 150, damping: 12 })
+  const heightI = useSpring(heightIcon, { mass: 0.1, stiffness: 150, damping: 12 })
 
   return (
     <Link href={href}>
