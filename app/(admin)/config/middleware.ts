@@ -8,14 +8,14 @@ export function middleware(req: NextRequest) {
   const url = req.nextUrl.clone()
 
   if (!token) {
-    url.pathname = "/config/page"
+    url.pathname = "/config"
     return NextResponse.redirect(url)
   }
 
   try {
     jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET!)
   } catch {
-    url.pathname = "/config/page"
+    url.pathname = "/config"
     return NextResponse.redirect(url)
   }
 

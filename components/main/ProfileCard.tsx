@@ -31,7 +31,7 @@ type Props = {
 }
 
 export default function ProfileCard({ profile, onSectionChange }: Props) {
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${profile.avatar_url}`const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${profile.avatar_url}`
+  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${profile.avatar_url}`
   const [selectedSection, setSelectedSection] = useState("#about")
 
   return (
