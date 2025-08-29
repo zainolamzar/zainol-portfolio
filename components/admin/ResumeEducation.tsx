@@ -1,8 +1,13 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { createClient } from "@supabase/supabase-js"
 import { toast } from "sonner"
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 type Education = {
   id: string
@@ -11,7 +16,6 @@ type Education = {
   start_date: string
   end_date?: string | null
   details?: string | null
-  // Optional: user_id?: string
 }
 
 type FormShape = {
@@ -31,7 +35,6 @@ const emptyForm: FormShape = {
 }
 
 export default function ResumeEducation() {
-  const supabase = createClientComponentClient()
   const [education, setEducation] = useState<Education[]>([])
   const [loading, setLoading] = useState(true)
 

@@ -1,9 +1,14 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { createClient } from "@supabase/supabase-js"
 import Image from "next/image"
 import { toast } from "sonner"
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 type SocialLink = { platform: string; url: string }
 
@@ -18,7 +23,6 @@ type Profile = {
 }
 
 export default function ResumeAbout() {
-  const supabase = createClientComponentClient()
   const [profile, setProfile] = useState<Profile | null>(null)
   const [formData, setFormData] = useState({
     name: "",

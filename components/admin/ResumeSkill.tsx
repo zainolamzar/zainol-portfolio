@@ -1,8 +1,13 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { createClient } from "@supabase/supabase-js"
 import { toast } from "sonner"
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 type Skill = {
   id: string
@@ -10,7 +15,6 @@ type Skill = {
 }
 
 export default function ResumeSkill() {
-  const supabase = createClientComponentClient()
   const [skills, setSkills] = useState<Skill[]>([])
   const [loading, setLoading] = useState(true)
 
