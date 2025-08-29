@@ -26,67 +26,130 @@ export default async function ProjectSlug({ params }: Params) {
     .single()
 
   if (error || !project) {
-    return <p className="text-red-600 p-4">Project not found.</p>
+    return (
+      <div className="min-h-screen bg-[rgb(25,26,28)] text-[#dfe4ed] p-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-red-400 text-xl">Project not found.</p>
+        </div>
+      </div>
+    )
   }
 
   const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${project.image_url}`
 
   return (
-      <><div className="p-8 max-w-4xl mx-auto">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/projects">Project</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{project.title}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+    <div className="min-h-screen bg-[rgb(25,26,28)] text-[#dfe4ed]">
+      {/* Header Section with Gradient */}
+      <div className="bg-gradient-to-b from-[#000b1f] to-[#00050f] py-12">
+        <div className="max-w-4xl mx-auto px-8">
+          {/* Breadcrumb */}
+          <Breadcrumb className="mb-6">
+            <BreadcrumbList className="text-[#dfe4ed]/70">
+              <BreadcrumbItem>
+                <BreadcrumbLink 
+                  href="/" 
+                  className="hover:text-[#dfe4ed] transition-colors duration-200"
+                >
+                  Home
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="text-[#dfe4ed]/50" />
+              <BreadcrumbItem>
+                <BreadcrumbLink 
+                  href="/projects" 
+                  className="hover:text-[#dfe4ed] transition-colors duration-200"
+                >
+                  Projects
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="text-[#dfe4ed]/50" />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="text-[#dfe4ed] font-medium">
+                  {project.title}
+                </BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
 
-      <h1 className="text-4xl font-bold mb-2 mt-3">{project.title}</h1>
+          {/* Title */}
+          <h1 className="text-5xl font-bold mb-6 leading-tight">
+            {project.title}
+          </h1>
 
-      {/* Project Buttons */}
-      <div className="flex gap-4 mb-4">
-        {project.url && (
-          <a
-            href={project.url}
-            target="_blank"
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-          >
-            <FaExternalLinkAlt /> Live Project
-          </a>
-        )}
-        {project.repo_url && (
-          <a
-            href={project.repo_url}
-            target="_blank"
-            className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition"
-          >
-            <FaGithub /> GitHub
-          </a>
-        )}
+          {/* Project Buttons */}
+          <div className="flex flex-wrap gap-4 mb-6">
+            {project.url && (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-6 py-3 bg-[#00050f] text-[#dfe4ed] rounded-xl hover:bg-[#000b1f] transition-all duration-300 border border-[#00050f]/50 hover:border-[#dfe4ed]/30 hover:scale-105"
+              >
+                <FaExternalLinkAlt className="text-lg" />
+                <span className="font-medium">Live Project</span>
+              </a>
+            )}
+            {project.repo_url && (
+              <a
+                href={project.repo_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-6 py-3 bg-[#00050f] text-[#dfe4ed] rounded-xl hover:bg-[#000b1f] transition-all duration-300 border border-[#00050f]/50 hover:border-[#dfe4ed]/30 hover:scale-105"
+              >
+                <FaGithub className="text-lg" />
+                <span className="font-medium">GitHub</span>
+              </a>
+            )}
+          </div>
+        </div>
       </div>
-      <div className="relative w-full h-64 mb-4">
-        <Image
-          src={imageUrl}
-          alt={project.title}
-          fill
-          className="object-cover rounded-lg"
-          sizes="(max-width: 768px) 100vw, 700px"
-          priority />
+
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto px-8 py-12">
+        {/* Featured Image */}
+        <div className="relative w-full h-[500px] mb-12 rounded-2xl overflow-hidden shadow-2xl">
+          <Image
+            src={imageUrl}
+            alt={project.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 700px"
+            priority
+          />
+          {/* Image overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#00050f]/80 via-transparent to-transparent" />
+        </div>
+
+        {/* Tech Stack */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-[#dfe4ed]">Technologies Used</h3>
+          <div className="flex flex-wrap gap-3">
+            {project.tech_stack.map((tech: string) => (
+              <span 
+                key={tech} 
+                className="bg-[#000b1f]/70 text-[#dfe4ed] text-sm px-4 py-2 rounded-full border border-[#00050f]/50 hover:border-[#dfe4ed]/30 transition-colors duration-200"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Project Description */}
+        <div className="bg-[#000b1f]/50 backdrop-blur-sm rounded-2xl p-8 border border-[#00050f]/30">
+          <h3 className="text-xl font-semibold mb-4 text-[#dfe4ed]">About This Project</h3>
+          <div className="prose prose-lg prose-invert max-w-none">
+            <p className="text-[#dfe4ed] leading-relaxed text-lg">
+              {project.description}
+            </p>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <footer className="mt-16 text-center text-[#dfe4ed]/50 text-sm border-t border-[#00050f]/30 pt-8">
+          © {new Date().getFullYear()} Exclusively By Zainol Amzar
+        </footer>
       </div>
-    </div><div className="flex flex-wrap gap-2">
-        {project.tech_stack.map((tech: string) => (
-          <span key={tech} className="bg-gray-200 text-gray-800 text-sm px-2 py-1 rounded-full">
-            {tech}
-          </span>
-        ))}
-      </div><p className="text-gray-700 mt-4">{project.description}</p></>
+    </div>
   )
 }
