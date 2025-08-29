@@ -10,19 +10,16 @@ import {
 } from "@/components/ui/breadcrumb"
 import type { Metadata } from "next"
 
-interface BlogPageProps {
-  params: {
-    slug: string
-  }
+// 🔑 Define props explicitly, no PageProps from next
+export type BlogPageProps = {
+  params: { slug: string }
 }
 
 // Pre-generate all slugs at build time
 export async function generateStaticParams() {
   const supabase = await createClient()
 
-  const { data: posts } = await supabase
-    .from("posts")
-    .select("slug")
+  const { data: posts } = await supabase.from("posts").select("slug")
 
   if (!posts) return []
 
@@ -31,7 +28,7 @@ export async function generateStaticParams() {
   }))
 }
 
-// Optional: set SEO metadata for each blog post
+// Optional: SEO metadata
 export async function generateMetadata(
   { params }: BlogPageProps
 ): Promise<Metadata> {
@@ -54,8 +51,8 @@ export async function generateMetadata(
 }
 
 export default async function BlogSlug({ params }: BlogPageProps) {
-  const { slug } = params
   const supabase = await createClient()
+  const { slug } = params
 
   const { data: blog, error } = await supabase
     .from("posts")
