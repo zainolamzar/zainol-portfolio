@@ -6,15 +6,15 @@ import SkillCard from "@/components/main/SkillCard"
 import EducationCard from "@/components/main/EducationCard"
 
 type Profile = { bio: string }
-type Experience = any[]
-type Skill = any[]
-type Education = any[]
+type Experience = string
+type Skill = string
+type Education = string
 
 type RightColumnProps = {
   profile: Profile
-  experience: Experience
-  skill: Skill
-  education: Education
+  experience: Experience[]
+  skill: Skill[]
+  education: Education[]
   selectedSection: string
 }
 

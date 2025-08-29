@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabaseServer"
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa"
+import Image from "next/image"
 
 import {
   Breadcrumb,
@@ -31,22 +32,22 @@ export default async function ProjectSlug({ params }: Params) {
   const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${project.image_url}`
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-        <Breadcrumb>
+      <><div className="p-8 max-w-4xl mx-auto">
+      <Breadcrumb>
         <BreadcrumbList>
-            <BreadcrumbItem>
+          <BreadcrumbItem>
             <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
             <BreadcrumbLink href="/projects">Project</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
             <BreadcrumbPage>{project.title}</BreadcrumbPage>
-            </BreadcrumbItem>
+          </BreadcrumbItem>
         </BreadcrumbList>
-        </Breadcrumb>
+      </Breadcrumb>
 
       <h1 className="text-4xl font-bold mb-2 mt-3">{project.title}</h1>
 
@@ -71,20 +72,21 @@ export default async function ProjectSlug({ params }: Params) {
           </a>
         )}
       </div>
-
       <div className="relative w-full h-64 mb-4">
-        <img src={imageUrl} alt={project.title} className="object-cover w-full h-full rounded-lg" />
+        <Image
+          src={imageUrl}
+          alt={project.title}
+          fill
+          className="object-cover rounded-lg"
+          sizes="(max-width: 768px) 100vw, 700px"
+          priority />
       </div>
-
-      <div className="flex flex-wrap gap-2">
-        {project.tech_stack.map((tech) => (
-            <span key={tech} className="bg-gray-200 text-gray-800 text-sm px-2 py-1 rounded-full">
+    </div><div className="flex flex-wrap gap-2">
+        {project.tech_stack.map((tech: string) => (
+          <span key={tech} className="bg-gray-200 text-gray-800 text-sm px-2 py-1 rounded-full">
             {tech}
           </span>
         ))}
-      </div>
-
-        <p className="text-gray-700 mt-4">{project.description}</p>
-    </div>
+      </div><p className="text-gray-700 mt-4">{project.description}</p></>
   )
 }

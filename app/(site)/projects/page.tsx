@@ -1,16 +1,6 @@
 import { createClient } from "@/lib/supabaseServer"
 import { FocusCards } from "@/components/ui/focus-cards"
 
-type Project = {
-  id: number
-  title: string
-  slug: string
-  description: string
-  image_url: string
-  tech_stack: string[]
-  project_url?: string
-}
-
 export default async function ProjectsPage() {
   const supabase = await createClient()
 

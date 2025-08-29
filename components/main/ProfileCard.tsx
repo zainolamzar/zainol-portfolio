@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { FaGithub, FaLinkedin, FaTiktok } from "react-icons/fa"
 import Image from "next/image"
 
@@ -32,7 +31,6 @@ type Props = {
 
 export default function ProfileCard({ profile, onSectionChange }: Props) {
   const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${profile.avatar_url}`
-  const [selectedSection, setSelectedSection] = useState("#about")
 
   return (
     <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-6">

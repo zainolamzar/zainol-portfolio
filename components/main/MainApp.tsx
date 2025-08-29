@@ -5,16 +5,29 @@ import ProfileCard from "@/components/main/ProfileCard"
 import RightColumn from "@/components/main/RightColumn"
 import CustomBoxesBackground from "@/components/ui/BoxesBackground"
 
+type Profile = {
+  name: string
+  headline: string
+  avatar_url: string
+  location: string
+  social_links?: {
+    github?: string
+    linkedin?: string
+    tiktok?: string
+  }
+  bio: string
+}
+
 export default function MainApp({
   profile,
   experience,
   education,
   skill,
 }: {
-  profile: any
-  experience: any[]
-  education: any[]
-  skill: any[]
+  profile: Profile
+  experience: string[]
+  education: string[]
+  skill: string[]
 }) {
   const [selectedSection, setSelectedSection] = useState("#about")
 
