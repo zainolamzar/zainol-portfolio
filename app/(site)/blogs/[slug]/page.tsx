@@ -8,35 +8,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import type { Metadata } from "next"
-
-// Force dynamic rendering to avoid build-time issues
-export const dynamic = 'force-dynamic'
 
 interface Params {
   params: { slug: string }
-}
-
-// Optional: SEO metadata
-export async function generateMetadata(
-  { params }: Params
-): Promise<Metadata> {
-  const supabase = await createClient()
-
-  const { data: blog } = await supabase
-    .from("posts")
-    .select("title, description")
-    .eq("slug", params.slug)
-    .single()
-
-  if (!blog) {
-    return { title: "Blog not found" }
-  }
-
-  return {
-    title: blog.title,
-    description: blog.description ?? `Read more about ${blog.title}`,
-  }
 }
 
 export default async function BlogSlug({ params }: Params) {
