@@ -35,7 +35,8 @@ export default async function ProjectSlug({ params }: Params) {
     )
   }
 
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${project.image_url}`
+  // image_url already contains the full URL, no need to reconstruct
+  const imageUrl = project.image_url
 
   return (
     <div className="min-h-screen bg-[rgb(25,26,28)] text-[#dfe4ed]">
@@ -96,8 +97,8 @@ export default async function ProjectSlug({ params }: Params) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 px-6 py-3 bg-[#00050f] text-[#dfe4ed] rounded-xl hover:bg-[#000b1f] transition-all duration-300 border border-[#00050f]/50 hover:border-[#dfe4ed]/30 hover:scale-105"
               >
-                              <FaGithub className="text-lg" />
-              <span className="font-medium">GitHub</span>
+                <FaGithub className="text-lg" />
+                <span className="font-medium">GitHub</span>
               </a>
             )}
           </div>

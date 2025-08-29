@@ -40,7 +40,8 @@ export default async function BlogSlug({ params }: Params) {
     year: "numeric",
   })
 
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${blog.image_url}`
+  // image_url already contains the full URL, no need to reconstruct
+  const imageUrl = blog.image_url
 
   return (
     <div className="min-h-screen bg-[rgb(25,26,28)] text-[#dfe4ed]">

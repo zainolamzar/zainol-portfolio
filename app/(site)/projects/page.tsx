@@ -29,7 +29,7 @@ export default async function ProjectsPage() {
         <FocusCards
           cards={projects.map((project) => ({
             title: project.title,
-            src: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${project.image_url}`,
+            src: project.image_url || "/placeholder-project.jpg", // image_url already contains full URL
             href: `/projects/${project.slug}`,
             description: project.description,
             tech_stack: project.tech_stack,

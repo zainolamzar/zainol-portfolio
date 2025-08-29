@@ -40,7 +40,7 @@ export default async function BlogsPage() {
         <FocusCards
           cards={blogs.map((blog) => ({
             title: blog.title,
-            src: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${blog.image_url}`,
+            src: blog.image_url || "/placeholder-blog.jpg", // image_url already contains full URL
             href: `/blogs/${blog.slug}`,
             description: blog.content,
             date: formatDate(blog.created_at),
