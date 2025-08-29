@@ -13,6 +13,7 @@ const supabase = createClient(
 type Project = {
   id: string
   title: string
+  slug: string
   description: string
   tech_stack: string[]
   url: string
@@ -27,6 +28,7 @@ export default function ProjectForm() {
   const [editId, setEditId] = useState<string | "new" | null>(null)
   const [formData, setFormData] = useState({
     title: "",
+    slug: "",
     description: "",
     tech_stack: [] as string[],
     url: "",
@@ -64,6 +66,7 @@ export default function ProjectForm() {
     setEditId(proj.id)
     setFormData({
       title: proj.title,
+      slug: proj.slug,
       description: proj.description,
       tech_stack: proj.tech_stack || [],
       url: proj.url,
@@ -76,6 +79,7 @@ export default function ProjectForm() {
     setEditId("new")
     setFormData({
       title: "",
+      slug: "",
       description: "",
       tech_stack: [],
       url: "",
@@ -88,6 +92,7 @@ export default function ProjectForm() {
     setEditId(null)
     setFormData({
       title: "",
+      slug: "",
       description: "",
       tech_stack: [],
       url: "",
@@ -114,6 +119,10 @@ export default function ProjectForm() {
   const saveNew = async () => {
     if (!formData.title.trim()) {
       toast.error("Project title is required")
+      return
+    }
+    if (!formData.slug.trim()) {
+      toast.error("Project slug is required")
       return
     }
     setSavingId("new")
@@ -195,6 +204,13 @@ export default function ProjectForm() {
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             className="w-full border p-2 rounded"
           />
+          <input
+            type="text"
+            placeholder="Slug (URL-friendly version of title)"
+            value={formData.slug}
+            onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+            className="w-full border p-2 rounded"
+          />
           <textarea
             placeholder="Description"
             value={formData.description}
@@ -262,7 +278,7 @@ export default function ProjectForm() {
                 disabled={savingId === editId}
                 className="px-4 py-2 bg-[#000b1f] text-white rounded"
               >
-                {savingId === editId ? "Saving..." : "Save"}
+                {savingId === editId ? "Saving..." : "Save Changes"}
               </button>
             )}
             <button
@@ -280,10 +296,13 @@ export default function ProjectForm() {
         {projects.map((proj) => (
           <li
             key={proj.id}
-            className="border rounded p-4 bg-white dark:bg-gray-900 flex justify-between items-center"
+            className="border rounded p-4 bg-white dark:bg-gray-800 flex justify-between items-center"
           >
             <div>
               <h3 className="text-lg font-bold">{proj.title}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Slug: <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">{proj.slug}</code>
+              </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {proj.description}
               </p>

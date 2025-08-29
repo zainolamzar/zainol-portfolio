@@ -13,6 +13,7 @@ const supabase = createClient(
 type Blog = {
   id: string
   title: string
+  slug: string
   content: string
   published: boolean
   image_url: string
@@ -25,6 +26,7 @@ export default function BlogForm() {
   const [editId, setEditId] = useState<string | "new" | null>(null)
   const [formData, setFormData] = useState({
     title: "",
+    slug: "",
     content: "",
     published: false,
     image_url: "",
@@ -60,6 +62,7 @@ export default function BlogForm() {
     setEditId(proj.id)
     setFormData({
       title: proj.title,
+      slug: proj.slug,
       content: proj.content,
       published: proj.published,
       image_url: proj.image_url,
@@ -70,6 +73,7 @@ export default function BlogForm() {
     setEditId("new")
     setFormData({
       title: "",
+      slug: "",
       content: "",
       published: false,
       image_url: "",
@@ -80,6 +84,7 @@ export default function BlogForm() {
     setEditId(null)
     setFormData({
       title: "",
+      slug: "",
       content: "",
       published: false,
       image_url: "",
@@ -104,6 +109,10 @@ export default function BlogForm() {
   const saveNew = async () => {
     if (!formData.title.trim()) {
       toast.error("Blog title is required")
+      return
+    }
+    if (!formData.slug.trim()) {
+      toast.error("Blog slug is required")
       return
     }
     setSavingId("new")
@@ -184,6 +193,13 @@ export default function BlogForm() {
             placeholder="Title"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          />
+          <input
+            type="text"
+            className="w-full border rounded px-3 py-2"
+            placeholder="Slug (URL-friendly version of title)"
+            value={formData.slug}
+            onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
           />
           <textarea
             className="w-full border rounded px-3 py-2"
@@ -269,6 +285,9 @@ export default function BlogForm() {
                 </button>
               </div>
             </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Slug: <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">{blog.slug}</code>
+            </p>
             {blog.image_url && (
               <Image
                 src={blog.image_url}
