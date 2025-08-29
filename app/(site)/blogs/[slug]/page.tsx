@@ -10,23 +10,15 @@ import {
 } from "@/components/ui/breadcrumb"
 import type { Metadata } from "next"
 
+// Force dynamic rendering to avoid build-time issues
+export const dynamic = 'force-dynamic'
+
 // 🔑 Define props explicitly, no PageProps from next
 export type BlogPageProps = {
   params: { slug: string }
 }
 
-// Pre-generate all slugs at build time
-export async function generateStaticParams() {
-  const supabase = await createClient()
 
-  const { data: posts } = await supabase.from("posts").select("slug")
-
-  if (!posts) return []
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}
 
 // Optional: SEO metadata
 export async function generateMetadata(
