@@ -13,14 +13,13 @@ import type { Metadata } from "next"
 // Force dynamic rendering to avoid build-time issues
 export const dynamic = 'force-dynamic'
 
-// 🔑 Define props explicitly, no PageProps from next
-export type BlogPageProps = {
+interface Params {
   params: { slug: string }
 }
 
 // Optional: SEO metadata
 export async function generateMetadata(
-  { params }: BlogPageProps
+  { params }: Params
 ): Promise<Metadata> {
   const supabase = await createClient()
 
@@ -40,7 +39,7 @@ export async function generateMetadata(
   }
 }
 
-export default async function BlogSlug({ params }: BlogPageProps) {
+export default async function BlogSlug({ params }: Params) {
   const supabase = await createClient()
   const { slug } = params
 
