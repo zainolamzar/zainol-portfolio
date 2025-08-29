@@ -4,6 +4,7 @@ import AboutCard from "@/components/main/AboutCard"
 import ExperienceCard from "@/components/main/ExperienceCard"
 import SkillCard from "@/components/main/SkillCard"
 import EducationCard from "@/components/main/EducationCard"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 type Profile = { bio: string }
 
@@ -56,8 +57,10 @@ export default function RightColumn({
   }
 
   return (
-    <div className="h-full flex flex-col overflow-hidden">
-      {renderSection()}
+    <div className="h-full flex flex-col">
+      <ScrollArea className="h-full">
+        {renderSection()}
+      </ScrollArea>
     </div>
   )
 }

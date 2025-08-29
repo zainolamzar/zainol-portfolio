@@ -50,12 +50,12 @@ export default function MainApp({
   const [selectedSection, setSelectedSection] = useState("#about")
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
+    <div className="relative w-screen h-screen">
       <CustomBoxesBackground />
       <main className="grid grid-cols-1 md:grid-cols-3 gap-8 w-screen h-screen p-8">
         {/* Left column */}
         <aside className="md:col-span-1 flex">
-          <div className="w-full rounded-2xl bg-white/10 backdrop-blur-md p-6 overflow-hidden">
+          <div className="w-full rounded-2xl bg-white/10 backdrop-blur-md p-6">
             {profile && (
               <ProfileCard
                 profile={profile}
