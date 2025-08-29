@@ -1,16 +1,6 @@
 import { createClient } from "@/lib/supabaseServer"
 import { FocusCards } from "@/components/ui/focus-cards"
 
-type Blog = {
-  id: number
-  title: string
-  slug: string
-  content: string
-  image_url: string
-  created_at: string
-  published: boolean
-}
-
 // Helper function to format date
 function formatDate(createdAt: string) {
   const createdDate = new Date(createdAt)

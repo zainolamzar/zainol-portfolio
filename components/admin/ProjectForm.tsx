@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
+import Image from "next/image"
 import { createClient } from "@supabase/supabase-js"
 import { toast } from "sonner"
 
@@ -57,7 +58,6 @@ export default function ProjectForm() {
 
   useEffect(() => {
     fetchProjects()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const beginEdit = (proj: Project) => {
@@ -237,9 +237,11 @@ export default function ProjectForm() {
             <input type="file" accept="image/*" onChange={handleImageUpload} />
             {uploading && <span>Uploading...</span>}
             {formData.image_url && (
-              <img
+              <Image
                 src={formData.image_url}
                 alt="project preview"
+                width={64}
+                height={64}
                 className="h-16 rounded border"
               />
             )}

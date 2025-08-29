@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabaseServer"
+import Image from "next/image"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,15 +8,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-
-type Blog = {
-  id: number
-  title: string
-  slug: string
-  content: string
-  image_url: string
-  created_at: string
-}
 
 interface Params {
   params: { slug: string }
@@ -46,6 +38,7 @@ export default async function BlogSlug({ params }: Params) {
   const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${blog.image_url}`
 
   return (
+    <>
     <div className="p-8 max-w-4xl mx-auto">
       <Breadcrumb>
         <BreadcrumbList>
@@ -65,13 +58,17 @@ export default async function BlogSlug({ params }: Params) {
 
       <h1 className="text-4xl font-bold mb-1 mt-3">{blog.title}</h1>
 
-      <div className="relative w-full h-64 mb-4">
-        <img src={imageUrl} alt={blog.title} className="object-cover w-full h-full rounded-lg" />
-      </div>
-
-      <p className="text-gray-500 text-sm mb-4">{formattedDate}</p>
-
-      <p className="text-gray-700 mt-4">{blog.content}</p>
+      <Image
+        src={imageUrl}
+        alt={blog.title}
+        fill
+        className="object-cover rounded-lg"
+        style={{ objectFit: "cover" }}
+        sizes="(max-width: 768px) 100vw, 700px"
+        priority />
     </div>
+    <p className="text-gray-500 text-sm mb-4">{formattedDate}</p><p className="text-gray-700 mt-4">{blog.content}</p>
+    </>
+
   )
 }

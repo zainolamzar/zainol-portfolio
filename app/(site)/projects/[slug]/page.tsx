@@ -10,17 +10,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
-type Project = {
-  id: number
-  title: string
-  slug: string
-  description: string
-  image_url: string
-  tech_stack: string[]
-  url?: string
-  repo_url?: string
-}
-
 interface Params {
   params: { slug: string }
 }

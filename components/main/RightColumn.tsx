@@ -1,6 +1,5 @@
 "use client"
 
-import { ScrollArea } from "@/components/ui/scroll-area"
 import AboutCard from "@/components/main/AboutCard"
 import ExperienceCard from "@/components/main/ExperienceCard"
 import SkillCard from "@/components/main/SkillCard"

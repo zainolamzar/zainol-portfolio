@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
+import Image from "next/image"
 import { createClient } from "@supabase/supabase-js"
 import { toast } from "sonner"
 
@@ -53,7 +54,6 @@ export default function BlogForm() {
 
   useEffect(() => {
     fetchBlogs()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const beginEdit = (proj: Blog) => {
@@ -144,14 +144,14 @@ export default function BlogForm() {
     const filePath = `blogs/${fileName}`
 
     const { error } = await supabase.storage
-      .from("projects") // ⚠️ maybe you want a `blogs` bucket instead?
+      .from("blogs")
       .upload(filePath, file, { upsert: true })
 
     if (error) {
       console.error("Upload error:", error)
       toast.error("Failed to upload blog image")
     } else {
-      const { data: urlData } = supabase.storage.from("projects").getPublicUrl(filePath)
+      const { data: urlData } = supabase.storage.from("blogs").getPublicUrl(filePath)
       setFormData((prev) => ({ ...prev, image_url: urlData.publicUrl }))
       toast.success("Image uploaded")
     }
@@ -206,9 +206,11 @@ export default function BlogForm() {
             <input type="file" onChange={handleImageUpload} />
             {uploading && <span>Uploading...</span>}
             {formData.image_url && (
-              <img
+              <Image
                 src={formData.image_url}
                 alt="Preview"
+                width={80}
+                height={80}
                 className="w-20 h-20 object-cover rounded"
               />
             )}
@@ -268,9 +270,11 @@ export default function BlogForm() {
               </div>
             </div>
             {blog.image_url && (
-              <img
+              <Image
                 src={blog.image_url}
                 alt={blog.title}
+                width={800}
+                height={320}
                 className="w-full h-40 object-cover rounded"
               />
             )}
