@@ -8,10 +8,48 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import type { Metadata } from "next"
 
 interface BlogPageProps {
   params: {
     slug: string
+  }
+}
+
+// Pre-generate all slugs at build time
+export async function generateStaticParams() {
+  const supabase = await createClient()
+
+  const { data: posts } = await supabase
+    .from("posts")
+    .select("slug")
+
+  if (!posts) return []
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
+// Optional: set SEO metadata for each blog post
+export async function generateMetadata(
+  { params }: BlogPageProps
+): Promise<Metadata> {
+  const supabase = await createClient()
+
+  const { data: blog } = await supabase
+    .from("posts")
+    .select("title, description")
+    .eq("slug", params.slug)
+    .single()
+
+  if (!blog) {
+    return { title: "Blog not found" }
+  }
+
+  return {
+    title: blog.title,
+    description: blog.description ?? `Read more about ${blog.title}`,
   }
 }
 
