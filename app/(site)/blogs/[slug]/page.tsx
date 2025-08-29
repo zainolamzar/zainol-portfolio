@@ -9,10 +9,14 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
-export default async function BlogSlug(
-  props: PageProps<'/blogs/[slug]'>
-) {
-  const { slug } = await props.params
+interface BlogPageProps {
+  params: {
+    slug: string
+  }
+}
+
+export default async function BlogSlug({ params }: BlogPageProps) {
+  const { slug } = params
   const supabase = await createClient()
 
   const { data: blog, error } = await supabase
