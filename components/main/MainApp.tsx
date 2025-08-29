@@ -18,6 +18,24 @@ type Profile = {
   bio: string
 }
 
+type Experience = {
+  role: string
+  company: string
+  start_date: string
+  end_date?: string
+  description?: string
+}
+
+type Skill = { name: string }
+
+type Education = {
+  school: string
+  degree: string
+  start_date: string
+  end_date?: string
+  description?: string
+}
+
 export default function MainApp({
   profile,
   experience,
@@ -25,9 +43,9 @@ export default function MainApp({
   skill,
 }: {
   profile: Profile
-  experience: string[]
-  education: string[]
-  skill: string[]
+  experience: Experience[]
+  skill: Skill[]
+  education: Education[]
 }) {
   const [selectedSection, setSelectedSection] = useState("#about")
 
