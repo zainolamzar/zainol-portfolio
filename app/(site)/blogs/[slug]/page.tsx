@@ -9,13 +9,11 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
-interface Params {
-  params: { slug: string }
-}
-
-export default async function BlogSlug({ params }: Params) {
+export default async function BlogSlug(
+  props: PageProps<'/blogs/[slug]'>
+) {
+  const { slug } = await props.params
   const supabase = await createClient()
-  const { slug } = params
 
   const { data: blog, error } = await supabase
     .from("posts")
@@ -27,7 +25,6 @@ export default async function BlogSlug({ params }: Params) {
     return <p className="text-red-600 p-4">Blog not found.</p>
   }
 
-  // Format the date as "Sunday, 26 May 2025"
   const formattedDate = new Date(blog.created_at).toLocaleDateString("en-MY", {
     weekday: "long",
     day: "2-digit",
@@ -38,8 +35,8 @@ export default async function BlogSlug({ params }: Params) {
   const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${blog.image_url}`
 
   return (
-    <>
     <div className="p-8 max-w-4xl mx-auto">
+      {/* Breadcrumb */}
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -56,19 +53,21 @@ export default async function BlogSlug({ params }: Params) {
         </BreadcrumbList>
       </Breadcrumb>
 
+      {/* Title & Image */}
       <h1 className="text-4xl font-bold mb-1 mt-3">{blog.title}</h1>
+      <div className="relative w-full h-[400px] mt-4 mb-6">
+        <Image
+          src={imageUrl}
+          alt={blog.title}
+          fill
+          className="object-cover rounded-lg"
+          priority
+        />
+      </div>
 
-      <Image
-        src={imageUrl}
-        alt={blog.title}
-        fill
-        className="object-cover rounded-lg"
-        style={{ objectFit: "cover" }}
-        sizes="(max-width: 768px) 100vw, 700px"
-        priority />
+      {/* Content */}
+      <p className="text-gray-500 text-sm mb-4">{formattedDate}</p>
+      <p className="text-gray-700 mt-4">{blog.content}</p>
     </div>
-    <p className="text-gray-500 text-sm mb-4">{formattedDate}</p><p className="text-gray-700 mt-4">{blog.content}</p>
-    </>
-
   )
 }
