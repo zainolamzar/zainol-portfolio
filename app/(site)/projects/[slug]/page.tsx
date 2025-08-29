@@ -12,12 +12,12 @@ import {
 } from "@/components/ui/breadcrumb"
 
 interface Params {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default async function ProjectSlug({ params }: Params) {
   const supabase = await createClient()
-  const { slug } = params
+  const { slug } = await params
 
   const { data: project, error } = await supabase
     .from("projects")
@@ -96,8 +96,8 @@ export default async function ProjectSlug({ params }: Params) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 px-6 py-3 bg-[#00050f] text-[#dfe4ed] rounded-xl hover:bg-[#000b1f] transition-all duration-300 border border-[#00050f]/50 hover:border-[#dfe4ed]/30 hover:scale-105"
               >
-                <FaGithub className="text-lg" />
-                <span className="font-medium">GitHub</span>
+                              <FaGithub className="text-lg" />
+              <span className="font-medium">GitHub</span>
               </a>
             )}
           </div>

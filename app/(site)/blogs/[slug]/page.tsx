@@ -10,12 +10,12 @@ import {
 } from "@/components/ui/breadcrumb"
 
 interface Params {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default async function BlogSlug({ params }: Params) {
   const supabase = await createClient()
-  const { slug } = params
+  const { slug } = await params
 
   const { data: blog, error } = await supabase
     .from("posts")
