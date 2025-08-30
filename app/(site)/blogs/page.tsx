@@ -29,9 +29,9 @@ export default async function BlogsPage() {
   if (error) return <p className="text-red-600">Failed to load blogs: {error.message}</p>
 
   return (
-    <div className="min-h-screen bg-[rgb(25,26,28)] text-[#dfe4ed] p-8">
+    <div className="min-h-screen bg-[rgb(25,26,28)] text-[#dfe4ed] p-3 sm:p-4 md:p-6 lg:p-8">
       {/* Page Header */}
-      <h1 className="text-5xl font-extrabold text-center mb-12 tracking-wide">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-8 sm:mb-10 md:mb-12 tracking-wide px-2">
         Blogs
       </h1>
 
@@ -47,13 +47,13 @@ export default async function BlogsPage() {
           }))}
         />
       ) : (
-        <p className="text-center text-lg text-gray-400">
+        <p className="text-center text-base sm:text-lg text-gray-400 px-4">
           No posts published yet. <span className="italic">Stay tuned!</span>
         </p>
       )}
 
       {/* Footer */}
-      <footer className="mt-16 text-center text-[#dfe4ed]/50 text-sm">
+      <footer className="mt-12 sm:mt-14 md:mt-16 text-center text-[#dfe4ed]/50 text-xs sm:text-sm px-4">
         © {new Date().getFullYear()} Exclusively By Zainol Amzar
       </footer>
     </div>

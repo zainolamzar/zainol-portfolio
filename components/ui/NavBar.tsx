@@ -28,10 +28,11 @@ export default function NavBar() {
     <motion.nav
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2
-                 hidden md:flex items-end gap-6 px-6 pb-3 h-16
+      className="fixed bottom-3 sm:bottom-4 md:bottom-6 left-1/2 -translate-x-1/2
+                 flex items-end gap-2 sm:gap-4 md:gap-6 px-3 sm:px-4 md:px-6 pb-2 sm:pb-3 h-12 sm:h-14 md:h-16
                  bg-[rgb(25,26,28)]/95 backdrop-blur-md
-                 border border-[#000b1f] shadow-lg rounded-2xl z-50"
+                 border border-[#000b1f] shadow-lg rounded-xl sm:rounded-2xl z-50
+                 w-auto min-w-fit"
     >
       {navItems.map((item) => (
         <DockIcon
@@ -89,7 +90,7 @@ function DockIcon({
           transition-colors 
           ${active ? "text-blue-400 bg-[rgb(35,36,40)]" : "text-[#dfe4ed] bg-[rgb(30,31,34)] hover:text-blue-300"}`}
       >
-        {/* Tooltip */}
+        {/* Tooltip - Hidden on mobile, shown on larger screens */}
         <AnimatePresence>
           {hovered && (
             <motion.div
@@ -98,7 +99,7 @@ function DockIcon({
               exit={{ opacity: 0, y: 2, x: "-50%" }}
               className="absolute -top-8 left-1/2 w-fit rounded-md 
                          border border-[#000b1f] bg-[rgb(25,26,28)] px-2 py-0.5 text-xs 
-                         text-[#dfe4ed] shadow-md whitespace-pre"
+                         text-[#dfe4ed] shadow-md whitespace-pre hidden sm:block"
             >
               {label}
             </motion.div>
