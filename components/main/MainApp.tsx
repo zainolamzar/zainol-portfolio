@@ -50,12 +50,12 @@ export default function MainApp({
   const [selectedSection, setSelectedSection] = useState("#about")
 
   return (
-    <div className="relative w-screen h-screen">
+    <div className="relative w-full min-h-screen">
       <CustomBoxesBackground />
-      <main className="grid grid-cols-1 md:grid-cols-3 gap-8 w-screen h-screen p-8">
-        {/* Left column */}
-        <aside className="md:col-span-1 flex">
-          <div className="w-full rounded-2xl bg-white/10 backdrop-blur-md p-6">
+      <main className="flex flex-col lg:grid lg:grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 w-full min-h-screen p-3 sm:p-4 md:p-6 lg:p-8">
+        {/* Left column - Profile */}
+        <aside className="lg:col-span-1 flex order-1 lg:order-1">
+          <div className="w-full rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-md p-3 sm:p-4 md:p-6">
             {profile && (
               <ProfileCard
                 profile={profile}
@@ -65,9 +65,9 @@ export default function MainApp({
           </div>
         </aside>
 
-        {/* Right column */}
-        <section className="md:col-span-2 flex">
-          <div className="w-full h-full rounded-2xl bg-white/10 backdrop-blur-md p-6 overflow-hidden">
+        {/* Right column - Content */}
+        <section className="lg:col-span-2 flex order-2 lg:order-2">
+          <div className="w-full h-full rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-md p-3 sm:p-4 md:p-6 overflow-hidden">
             <RightColumn
               profile={profile}
               experience={experience}
