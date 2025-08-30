@@ -10,8 +10,10 @@ import {
   FaGraduationCap,
   FaTools,
   FaProjectDiagram,
+  FaScrewdriver,
   FaBlog,
 } from "react-icons/fa"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import LogoutButton from "./LogoutButton"
 
 export const AdminSidebar = () => {
@@ -28,6 +30,10 @@ export const AdminSidebar = () => {
 
   const projectLinks = [
     { label: "Projects", href: "/config/project", icon: <FaProjectDiagram /> },
+  ]
+
+  const serviceLinks = [
+    { label: "Services", href: "/config/service", icon: <FaScrewdriver /> },
   ]
 
   const blogLinks = [
@@ -50,6 +56,7 @@ export const AdminSidebar = () => {
           />
         </div>
 
+        <ScrollArea>
         {/* Dashboard Section */}
         <div>
           <h3 className="text-sm font-bold uppercase mb-1 text-[#dfe4ed]">
@@ -86,6 +93,18 @@ export const AdminSidebar = () => {
           </div>
         </div>
 
+        {/* Services Section */}
+        <div>
+          <h3 className="text-sm font-bold uppercase mb-1 text-[#dfe4ed]">
+            Services
+          </h3>
+          <div className="flex flex-col gap-1">
+            {serviceLinks.map((link) => (
+              <SidebarLink key={link.href} link={link} />
+            ))}
+          </div>
+        </div>
+
         {/* Blog Section */}
         <div>
           <h3 className="text-sm font-bold uppercase mb-2 text-[#dfe4ed]">
@@ -97,6 +116,7 @@ export const AdminSidebar = () => {
             ))}
           </div>
         </div>
+        </ScrollArea>
 
         {/* Logout Section positioned at the bottom */}
         <div className="mt-auto">

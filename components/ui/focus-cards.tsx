@@ -38,7 +38,7 @@ export const Card = React.memo(
       {/* Image wrapper with 16:9 ratio */}
       <div className="relative w-full aspect-video">
         <Image
-          src={card.src}
+          src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${card.src}`}
           alt={card.title}
           fill
           className="object-cover"
