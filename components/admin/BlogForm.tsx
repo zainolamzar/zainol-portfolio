@@ -146,25 +146,19 @@ export default function BlogForm() {
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) return
-    const file = e.target.files[0]
-    setUploading(true)
-    const fileExt = file.name.split(".").pop()
-    const fileName = `${Date.now()}.${fileExt}`
-    const filePath = `blogs/${fileName}`
-
-    const { error } = await supabase.storage
-      .from("blogs")
-      .upload(filePath, file, { upsert: true })
-
-    if (error) {
-      console.error("Upload error:", error)
-      toast.error("Failed to upload blog image")
-    } else {
-      const { data: urlData } = supabase.storage.from("blogs").getPublicUrl(filePath)
-      setFormData((prev) => ({ ...prev, image_url: urlData.publicUrl }))
-      toast.success("Image uploaded")
-    }
-    setUploading(false)
+        const file = e.target.files[0]
+        setUploading(true)
+        const fileExt = file.name.split(".").pop()
+        const fileName = `${Date.now()}.${fileExt}`
+        const filePath = `projects/${Date.now()}.${fileExt}`
+        const { error } = await supabase.storage.from("projects").upload(fileName, file, { upsert: true })
+        if (error) {
+          console.error("Upload error:", error)
+          toast.error("Failed to upload project image")
+        } else {
+          setFormData((prev) => ({ ...prev, image_url: filePath }))
+        }
+        setUploading(false)
   }
 
   if (loading) return <p>Loading blogs...</p>
@@ -223,7 +217,7 @@ export default function BlogForm() {
             {uploading && <span>Uploading...</span>}
             {formData.image_url && (
               <Image
-                src={formData.image_url}
+                src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${formData.image_url}`}
                 alt="Preview"
                 width={80}
                 height={80}

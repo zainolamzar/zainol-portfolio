@@ -8,7 +8,9 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { motion, AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 
-type Profile = { bio: string }
+type Profile = { 
+  bio: string 
+}
 
 type Experience = {
   role: string
@@ -18,7 +20,9 @@ type Experience = {
   description?: string
 }
 
-type Skill = { name: string }
+type Skill = { 
+  name: string 
+}
 
 type Education = {
   school: string

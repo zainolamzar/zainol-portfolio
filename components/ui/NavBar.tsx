@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { FaHome, FaProjectDiagram, FaBlog } from "react-icons/fa"
+import { FaHome, FaProjectDiagram, FaServicestack, FaBlog } from "react-icons/fa"
 import {
   AnimatePresence,
   motion,
@@ -19,6 +19,7 @@ export default function NavBar() {
   const navItems = [
     { label: "Home", href: "/", icon: <FaHome /> },
     { label: "Projects", href: "/projects", icon: <FaProjectDiagram /> },
+    { label: "Services", href: "/services", icon: <FaServicestack /> },
     { label: "Blogs", href: "/blogs", icon: <FaBlog /> },
   ]
 
