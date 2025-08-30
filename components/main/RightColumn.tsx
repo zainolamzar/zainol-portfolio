@@ -5,6 +5,8 @@ import ExperienceCard from "@/components/main/ExperienceCard"
 import SkillCard from "@/components/main/SkillCard"
 import EducationCard from "@/components/main/EducationCard"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { motion, AnimatePresence } from "motion/react"
+import { useMemo } from "react"
 
 type Profile = { bio: string }
 
@@ -56,10 +58,27 @@ export default function RightColumn({
     }
   }
 
+  // Memoize the section content to prevent unnecessary re-renders
+  const sectionContent = useMemo(() => renderSection(), [selectedSection, profile, experience, skill, education])
+
   return (
     <div className="h-full flex flex-col">
       <ScrollArea className="h-full">
-        {renderSection()}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedSection}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{
+              duration: 0.3,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
+            className="h-full"
+          >
+            {sectionContent}
+          </motion.div>
+        </AnimatePresence>
       </ScrollArea>
     </div>
   )
