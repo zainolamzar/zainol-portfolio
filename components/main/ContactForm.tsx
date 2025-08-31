@@ -175,7 +175,7 @@ export default function ContactForm() {
                   name="phone_number"
                   value={formData.phone_number ?? ""}
                   onChange={handleChange}
-                  placeholder="e.g., 60123456789"
+                  placeholder="e.g., 0123456789"
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-700 outline-none focus:ring-2 focus:ring-blue-500 transition text-sm sm:text-base"
                   style={{ backgroundColor: "#00050f", color: "#dfe4ed" }}
                 />
