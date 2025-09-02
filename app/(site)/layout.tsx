@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   },
   description: "Zainol Amzar is a passionate software engineer from Malaysia, constantly advancing in coding and deep learning. Join his journey of growth.",
   keywords: ["Zainol Amzar", "Software Engineer", "Programmer", "Portfolio", "Software Developer", "Malaysia"],
-  authors: [{ name: "Zainol Amzar", url: "https://zainol-amzar.vercel.app" }],
+  authors: [{ name: "Zainol Amzar", url: "https://zainol-amzar.my" }],
   openGraph: {
     type: "website",
     locale: "en_MY",
-    url: "https://zainol-amzar.vercel.app",
+    url: "https://zainol-amzar.my",
     siteName: "Zainol Amzar Portfolio",
     title: "Zainol Amzar Portfolio | Software Engineer | Malaysia",
     description: "Zainol Amzar is a passionate software engineer from Malaysia, constantly advancing in coding and deep learning. Join his journey of growth.",
