@@ -47,7 +47,8 @@ export default function RightColumn({
   education,
   selectedSection,
 }: RightColumnProps) {
-  const renderSection = () => {
+  // Memoize the section content to prevent unnecessary re-renders
+  const sectionContent = useMemo(() => {
     switch (selectedSection) {
       case "#about":
         return <AboutCard about={profile} />
@@ -60,10 +61,7 @@ export default function RightColumn({
       default:
         return null
     }
-  }
-
-  // Memoize the section content to prevent unnecessary re-renders
-  const sectionContent = useMemo(() => renderSection(), [selectedSection, profile, experience, skill, education])
+  }, [selectedSection, profile, experience, skill, education])
 
   return (
     <div className="h-full flex flex-col">
