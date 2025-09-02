@@ -6,7 +6,7 @@ const config: DefaultSeoProps = {
   openGraph: {
     type: "website",
     locale: "en_MY",
-    url: "https://zainol-amzar.vercel.app",
+    url: "https://zainol-amzar.my",
     title: "Zainol Amzar Portfolio | Software Engineer | Malaysia",
     description: "Zainol Amzar is a passionate software engineer from Malaysia, constantly advancing in coding and deep learning. Join his journey of growth.",
     images: [

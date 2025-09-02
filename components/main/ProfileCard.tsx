@@ -43,9 +43,12 @@ export default function ProfileCard({ profile, onSectionChange }: Props) {
         height={100}
         className="rounded-full shadow-lg"
       />
-      <h1 className="mt-2 text-2xl font-bold text-[#dfe4ed]">{profile.name}</h1>
-      <p className="text-[#dfe4ed]">{profile.headline}</p>
-      <p className="text-[#dfe4ed]">{profile.location}</p>
+      <h1 className="hidden">Zainol Amzar | Malaysian</h1>
+      <h2 className="mt-2 text-2xl font-bold text-[#dfe4ed]">{profile.name}</h2>
+      <h3 className="text-[#dfe4ed]">{profile.headline}</h3>
+      <h4 className="text-[#dfe4ed]">{profile.location}</h4>
+      <h5 className="hidden">Can be reached via TikTok, X, Email</h5>
+      <h6 className="hidden">A Malaysian software engineer and web developer</h6>
 
       <div className="flex gap-6 justify-center mt-5">
         <Tooltip>
