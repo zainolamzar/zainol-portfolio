@@ -5,6 +5,9 @@ type About = {
 }
 
 export default function AboutCard({ about }: { about: About }) {
+  // Split bio text into paragraphs if available
+  const paragraphs = about?.bio ? about.bio.trim().split(/\n\s*\n/) : []
+
   return (
     <div className="p-6 text-[#dfe4ed]">
       <h2
@@ -15,9 +18,20 @@ export default function AboutCard({ about }: { about: About }) {
         About Me
       </h2>
 
-      <p className="text-base leading-relaxed text-[#dfe4ed]/90">
-        {about?.bio || "No bio available."}
-      </p>
+      {paragraphs.length > 0 ? (
+        paragraphs.map((para, idx) => (
+          <p
+            key={idx}
+            className="text-base leading-relaxed text-[#dfe4ed]/90 mb-4 last:mb-0"
+          >
+            {para}
+          </p>
+        ))
+      ) : (
+        <p className="text-base leading-relaxed text-[#dfe4ed]/90">
+          No bio available.
+        </p>
+      )}
     </div>
   )
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import { FaGithub, FaLinkedin, FaTiktok } from "react-icons/fa"
+import { FaXTwitter } from "react-icons/fa6"
 import Image from "next/image"
 
 import NavSelect from "./NavSelect"
@@ -20,6 +21,7 @@ type Profile = {
     github?: string
     linkedin?: string
     tiktok?: string
+    x?: string
   }
   bio: string
 }
@@ -41,7 +43,7 @@ export default function ProfileCard({ profile, onSectionChange }: Props) {
         height={100}
         className="rounded-full shadow-lg"
       />
-      <h2 className="mt-2 text-2xl font-bold text-[#dfe4ed]">{profile.name}</h2>
+      <h1 className="mt-2 text-2xl font-bold text-[#dfe4ed]">{profile.name}</h1>
       <p className="text-[#dfe4ed]">{profile.headline}</p>
       <p className="text-[#dfe4ed]">{profile.location}</p>
 
@@ -51,6 +53,9 @@ export default function ProfileCard({ profile, onSectionChange }: Props) {
             <a
               href={profile.social_links?.github}
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              title="GitHub"
               className="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110"
             >
               <FaGithub className="w-6 h-6" />
@@ -63,8 +68,28 @@ export default function ProfileCard({ profile, onSectionChange }: Props) {
         <Tooltip>
           <TooltipTrigger asChild>
             <a
+              href={profile.social_links?.x}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X profile"
+              title="X"
+              className="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110"
+            >
+              <FaXTwitter className="w-6 h-6" />
+            </a>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>X</p>
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <a
               href={profile.social_links?.tiktok}
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok profile"
+              title="TikTok"
               className="text-gray-400 hover:text-black transition-colors duration-300 transform hover:scale-110"
             >
               <FaTiktok className="w-6 h-6" />
@@ -79,6 +104,9 @@ export default function ProfileCard({ profile, onSectionChange }: Props) {
             <a
               href={profile.social_links?.linkedin}
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              title="LinkedIn"
               className="text-gray-400 hover:text-blue-500 transition-colors duration-300 transform hover:scale-110"
             >
               <FaLinkedin className="w-6 h-6" />

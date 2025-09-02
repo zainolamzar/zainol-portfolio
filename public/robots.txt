@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://zainol-amzar.vercel.app
+
+# Sitemaps
+Sitemap: https://zainol-amzar.vercel.app/sitemap.xml
