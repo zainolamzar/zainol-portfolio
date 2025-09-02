@@ -6,7 +6,7 @@ export default function BoxesBackground() {
       {Array.from({ length: 96 }).map((_, i) => (
         <div
           key={i}
-          className="bg-[#00050f]"
+          className="bg-[rgb(25,26,28)]"
         />
       ))}
     </div>
