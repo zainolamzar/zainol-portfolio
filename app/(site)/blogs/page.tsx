@@ -1,6 +1,16 @@
 import { createClient } from "@/lib/supabaseServer"
 import { FocusCards } from "@/components/ui/focus-cards"
 
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Blogs | Zainol Amzar Portfolio",
+  description: "Interesting topics and issues from Zainol Amzar.",
+  alternates: {
+    canonical: "https://www.zainolamzar.com/blogs",
+  },
+}
+
 // Helper function to format date
 function formatDate(createdAt: string) {
   const createdDate = new Date(createdAt)

@@ -9,8 +9,22 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
+import type { Metadata } from "next"
 interface Params {
   params: Promise<{ slug: string }>
+}
+
+type Props = {
+  params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  return {
+    title: `${params.slug} | Blogs | Zainol Amzar Portfolio`,
+    alternates: {
+      canonical: `https://www.zainolamzar.com/blogs/${params.slug}`,
+    },
+  }
 }
 
 export default async function BlogSlug({ params }: Params) {
