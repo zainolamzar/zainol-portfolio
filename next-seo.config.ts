@@ -8,10 +8,10 @@ const config: DefaultSeoProps = {
     locale: "en_MY",
     url: "https://zainol-amzar.my",
     title: "Zainol Amzar Portfolio | Software Engineer | Malaysia",
-    description: "Zainol Amzar is a passionate software engineer from Malaysia, constantly advancing in coding and deep learning. Join his journey of growth.",
+    description: "Zainol Amzar is a passionate software engineer from Malaysia, skilled in coding, UI/UX, and deep learning. Explore his portfolio and journey of growth.",
     images: [
       {
-        url: "https://my-nextjs-site.com/og-image.jpg",
+        url: "https://zainolamzar.my/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Zainol Amzar Portfolio",
