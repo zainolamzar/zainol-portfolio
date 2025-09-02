@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from '@vercel/analytics/next';
 import "../globals.css"
+import Script from "next/script"
 
 import NavBar from "@/components/ui/NavBar";
 
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     template: "%s | Zainol Amzar Portfolio",
   },
   description: "Zainol Amzar is a passionate software engineer from Malaysia, skilled in coding, UI/UX, and deep learning. Explore his portfolio and journey of growth.",
+  metadataBase: new URL("https://www.zainolamzar.com"),
   keywords: ["Zainol Amzar", "Software Engineer", "Programmer", "Portfolio", "Software Developer", "Malaysia"],
   authors: [{ name: "Zainol Amzar", url: "https://zainol-amzar.my" }],
   openGraph: {
@@ -75,6 +77,19 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-B88TVQCBSX`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-B88TVQCBSX');
+          `}
+        </Script>
       </head>
       <body className="antialiased">
         {children}

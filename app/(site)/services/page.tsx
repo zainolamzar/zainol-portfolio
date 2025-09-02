@@ -1,6 +1,16 @@
 import ServicesCarousel from "@/components/main/ServicesCarousel"
 import ContactForm from "@/components/main/ContactForm"
 
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "My Services | Zainol Amzar Portfolio",
+  description: "Services that Zainol Amzar provides.",
+  alternates: {
+    canonical: "https://www.zainolamzar.com/services",
+  },
+}
+
 export default function ServicesPage() {
     return (
         <div className="min-h-screen bg-[rgb(25,26,28)] text-[#dfe4ed] p-3 sm:p-4 md:p-6 lg:p-8">
