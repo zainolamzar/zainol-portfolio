@@ -3,7 +3,7 @@
 import { useState } from "react"
 import ProfileCard from "@/components/main/ProfileCard"
 import RightColumn from "@/components/main/RightColumn"
-import CustomBoxesBackground from "@/components/ui/BoxesBackground"
+import BoxesBackground from "@/components/ui/BoxesBackground"
 
 type Profile = {
   name: string
@@ -51,7 +51,7 @@ export default function MainApp({
 
   return (
     <div className="relative w-full min-h-screen">
-      <CustomBoxesBackground />
+      <BoxesBackground />
       <main className="flex flex-col lg:grid lg:grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 w-full min-h-screen p-3 sm:p-4 md:p-6 lg:p-8">
         {/* Left column - Profile */}
         <aside className="lg:col-span-1 flex order-1 lg:order-1">
