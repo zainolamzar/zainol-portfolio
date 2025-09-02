@@ -48,7 +48,6 @@ export const metadata: Metadata = {
       { url: "/assets/webicon/apple-icon-180x180.png", sizes: "180x180" },
     ],
   },
-  themeColor: "#ffffff",
   manifest: "/manifest.json", // optional, if you make a PWA
   other: {
     "msapplication-TileColor": "#ffffff",
