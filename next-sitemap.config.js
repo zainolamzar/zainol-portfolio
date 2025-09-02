@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://zainol-amzar.my",
+  siteUrl: "https://zainolamzar.my",
   generateRobotsTxt: true,
   changefreq: "daily",
   priority: 0.7,
