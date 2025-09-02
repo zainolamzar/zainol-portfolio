@@ -1,6 +1,16 @@
 import { createClient } from "@/lib/supabaseServer"
 import { FocusCards } from "@/components/ui/focus-cards"
 
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "My Projects | Zainol Amzar Portfolio",
+  description: "Projects that Zainol Amzar worked hard to improve himself.",
+  alternates: {
+    canonical: "https://www.zainolamzar.com/projects",
+  },
+}
+
 export default async function ProjectsPage() {
   const supabase = await createClient()
 
