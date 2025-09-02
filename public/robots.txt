@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://zainol-amzar.vercel.app
+Host: https://zainolamzar.my
 
 # Sitemaps
-Sitemap: https://zainol-amzar.vercel.app/sitemap.xml
+Sitemap: https://zainolamzar.my/sitemap.xml
