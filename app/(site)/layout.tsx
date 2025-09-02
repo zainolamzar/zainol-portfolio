@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Analytics } from '@vercel/analytics/next';
 import "../globals.css"
+
 import Script from "next/script"
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import NavBar from "@/components/ui/NavBar";
 
@@ -95,6 +97,7 @@ export default function RootLayout({
       <body className="antialiased">
         {children}
         <NavBar />
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>
