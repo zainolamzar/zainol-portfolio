@@ -39,7 +39,7 @@ export default async function ProjectsPage() {
         <FocusCards
           cards={projects.map((project) => ({
             title: project.title,
-            src: project.image_url || "/placeholder-project.jpg", // image_url already contains full URL
+            src: project.image_url,
             href: `/projects/${project.slug}`,
             description: project.description,
             tech_stack: project.tech_stack,
