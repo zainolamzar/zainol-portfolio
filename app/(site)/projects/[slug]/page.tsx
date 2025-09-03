@@ -124,7 +124,7 @@ export default async function ProjectSlug({ params }: Params) {
         {/* Featured Image */}
         <div className="relative w-full h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] mb-8 sm:mb-10 md:mb-12 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
           <Image
-            src={imageUrl}
+            src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${imageUrl}`}
             alt={project.title}
             fill
             className="object-cover"
