@@ -75,8 +75,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
+        <Script
+          id="structured-data"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {/* Google Analytics */}
