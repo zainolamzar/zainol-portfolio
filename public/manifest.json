@@ -10,8 +10,8 @@
       "type": "image/png"
     },
     {
-      "src": "/android-icon-144x144.png",
-      "sizes": "144x144",
+      "src": "/android-icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
