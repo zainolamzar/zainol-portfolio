@@ -32,7 +32,7 @@ type Props = {
 }
 
 export default function ProfileCard({ profile, onSectionChange }: Props) {
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${profile.avatar_url}`
+  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${profile.avatar_url}?width=100&height=100&quality=80`
 
   return (
     <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-6">
@@ -41,6 +41,7 @@ export default function ProfileCard({ profile, onSectionChange }: Props) {
         alt={profile.name}
         width={100}
         height={100}
+        priority
         className="rounded-full shadow-lg"
       />
       <h1 className="hidden">Zainol Amzar | Malaysian</h1>
