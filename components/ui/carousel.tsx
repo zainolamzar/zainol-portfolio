@@ -92,6 +92,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
             sizes="(max-width: 640px) 70vw, (max-width: 768px) 60vw, (max-width: 1024px) 50vw, 40vw"
             loading="eager"
             decoding="sync"
+            priority
             style={{
               opacity: current === index ? 1 : 0.5,
             }}
