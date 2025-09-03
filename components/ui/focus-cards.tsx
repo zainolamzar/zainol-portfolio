@@ -41,6 +41,7 @@ export const Card = React.memo(
           src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${card.src}`}
           alt={card.title}
           fill
+          priority
           className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
         />

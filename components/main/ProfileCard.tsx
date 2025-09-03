@@ -36,14 +36,17 @@ export default function ProfileCard({ profile, onSectionChange }: Props) {
 
   return (
     <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-6">
-      <Image
-        src={imageUrl}
-        alt={profile.name}
-        width={100}
-        height={100}
-        priority
-        className="rounded-full shadow-lg"
-      />
+      <div className="relative w-24 h-24 mb-2">
+        <Image
+          src={imageUrl}
+          alt={profile.name}
+          fill
+          sizes="96px"
+          priority
+          className="rounded-full shadow-lg object-cover"
+        />
+      </div>
+      
       <h1 className="hidden">Zainol Amzar | Malaysian</h1>
       <h2 className="mt-2 text-2xl font-bold text-[#dfe4ed]">{profile.name}</h2>
       <h3 className="text-[#dfe4ed]">{profile.headline}</h3>
