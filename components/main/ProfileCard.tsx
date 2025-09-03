@@ -41,6 +41,7 @@ export default function ProfileCard({ profile, onSectionChange }: Props) {
         alt={profile.name}
         width={100}
         height={100}
+        priority
         className="rounded-full shadow-lg"
       />
       <h1 className="hidden">Zainol Amzar | Malaysian</h1>
