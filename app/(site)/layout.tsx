@@ -6,15 +6,16 @@ import Script from "next/script"
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import NavBar from "@/components/ui/NavBar";
+import BuyMeACoffeeWidget from "@/components/main/BuyMeACoffeeWidget";
 
 export const metadata: Metadata = {
   title: {
-    default: "Zainol Amzar Portfolio | Software Engineer | Malaysia",
+    default: "Zainol Amzar Portfolio | Full Stack Developer | Malaysia",
     template: "%s | Zainol Amzar Portfolio",
   },
-  description: "Zainol Amzar is a passionate software engineer from Malaysia, skilled in coding, UI/UX, and deep learning. Explore his portfolio and journey of growth.",
+  description: "Zainol Amzar is a passionate full stack developer from Malaysia, skilled in coding, UI/UX, and deep learning. Explore his portfolio and journey of growth.",
   metadataBase: new URL("https://www.zainolamzar.com"),
-  keywords: ["Zainol Amzar", "Software Engineer", "Programmer", "Portfolio", "Software Developer", "Malaysia"],
+  keywords: ["full stack developer", "web developer", "software engineer", "hire web developer", "hire software engineer", "hire full stack developer", "portfolio", "website", "programmer", "website developer"],
   authors: [{ name: "Zainol Amzar", url: "https://zainol-amzar.my" }],
   openGraph: {
     type: "website",
@@ -101,6 +102,7 @@ export default function RootLayout({
         <NavBar />
         <SpeedInsights />
         <Analytics />
+        <BuyMeACoffeeWidget />
       </body>
     </html>
   );

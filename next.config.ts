@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         hostname: "viigdqdgakrsgxmqpker.supabase.co",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.buymeacoffee.com",
+        pathname: "/**", // allow all images from Buy Me a Coffee CDN
+      },
     ],
   },
 };
