@@ -81,7 +81,7 @@ function DockIcon({
   const heightI = useSpring(heightIcon, { mass: 0.1, stiffness: 150, damping: 12 })
 
   return (
-    <Link href={href}>
+    <Link href={href} aria-label={`Go to ${label} page`}>
       <motion.div
         ref={ref}
         style={{ width, height }}
