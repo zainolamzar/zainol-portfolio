@@ -145,3 +145,15 @@
 .animate-spin-slow {
   animation: spin-slow 30s linear infinite;
 }
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-15deg); }
+  40% { transform: rotate(15deg); }
+  60% { transform: rotate(-10deg); }
+  80% { transform: rotate(10deg); }
+}
+
+.animate-shake {
+  animation: shake 0.8s ease-in-out;
+}
