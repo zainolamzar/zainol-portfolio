@@ -125,6 +125,20 @@ export default function ProfileCard({ profile, onSectionChange }: Props) {
         </Tooltip>
       </div>
 
+      <a
+        href="https://www.buymeacoffee.com/zainolamzar"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image
+          src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+          alt="Buy Me A Coffee"
+          width={217}
+          height={60}
+          style={{ height: "60px", width: "217px" }}
+        />
+      </a>
+
       <NavSelect onChange={onSectionChange} />
     </div>
   )
