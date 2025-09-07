@@ -12,8 +12,9 @@ export default function NavSelect({ onChange }: { onChange: (value: string) => v
   return (
     <div className="mt-8 w-40">
       <Select defaultValue="#about" onValueChange={onChange}>
-        {/* Trigger */}
+        {/* Trigger with aria-label */}
         <SelectTrigger
+          aria-label="Navigate to section"
           className="w-full rounded-xl border border-[#000b1f] 
                      bg-[rgb(25,26,28)] text-[#dfe4ed] 
                      shadow-md hover:bg-[rgb(1,1,1)] 
