@@ -95,6 +95,13 @@ export default function RootLayout({
             gtag('config', 'G-B88TVQCBSX');
           `}
         </Script>
+      </head>
+      <body className="antialiased">
+        {children}
+        <NavBar />
+        <SpeedInsights />
+        <Analytics />
+
         <Script
           src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
           data-name="BMC-Widget"
@@ -108,12 +115,6 @@ export default function RootLayout({
           data-y_margin="18"
           strategy="afterInteractive"
         />
-      </head>
-      <body className="antialiased">
-        {children}
-        <NavBar />
-        <SpeedInsights />
-        <Analytics />
       </body>
     </html>
   );
