@@ -10,24 +10,28 @@ import {
 } from "@/components/ui/breadcrumb"
 
 import type { Metadata } from "next"
-interface Params {
-  params: Promise<{ slug: string }>
-}
 
 type Props = {
   params: { slug: string }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+
+  const formattedSlug = slug
+    .split("-")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+
   return {
-    title: `${params.slug} | Blogs | Zainol Amzar Portfolio`,
+    title: `${formattedSlug} | Blogs | Zainol Amzar Portfolio`,
     alternates: {
-      canonical: `https://www.zainolamzar.com/blogs/${params.slug}`,
+      canonical: `https://www.zainolamzar.com/blogs/${slug}`,
     },
   }
 }
 
-export default async function BlogSlug({ params }: Params) {
+export default async function BlogSlug({ params }: Props) {
   const supabase = await createClient()
   const { slug } = await params
 
@@ -54,12 +58,11 @@ export default async function BlogSlug({ params }: Params) {
     year: "numeric",
   })
 
-  // image_url already contains the full URL, no need to reconstruct
   const imageUrl = blog.image_url
 
   return (
     <div className="min-h-screen bg-[rgb(25,26,28)] text-[#dfe4ed]">
-      {/* Header Section with Gradient */}
+      {/* Header Section */}
       <div className="bg-gradient-to-b from-[#000b1f] to-[#00050f] py-6 sm:py-8 md:py-12">
         <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           {/* Breadcrumb */}
@@ -95,7 +98,7 @@ export default async function BlogSlug({ params }: Params) {
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
             {blog.title}
           </h1>
-          
+
           {/* Date */}
           <p className="text-[#dfe4ed]/60 text-base sm:text-lg">
             {formattedDate}
@@ -115,16 +118,39 @@ export default async function BlogSlug({ params }: Params) {
             priority
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 700px"
           />
-          {/* Image overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#00050f]/80 via-transparent to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="bg-[#000b1f]/50 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 border border-[#00050f]/30">
-          <div className="prose prose-sm sm:prose-base md:prose-lg prose-invert max-w-none">
-            <p className="text-[#dfe4ed] leading-relaxed text-base sm:text-lg">
-              {blog.content}
-            </p>
+        <div className="bg-[#000b1f]/50 backdrop-blur-sm rounded-2xl p-8 border border-[#00050f]/30">
+          <div className="prose prose-lg prose-invert max-w-none">
+            {blog.content
+              .replace(/\\n/g, "\n")
+              .split(/\n+/)
+              .filter((line: string) => line.trim() !== "")
+              .map((line: string, index: number) => {
+                const headerMatch = line.trim().match(/^<header>(.*?)<\/header>$/)
+
+                if (headerMatch) {
+                  return (
+                    <h2
+                      key={index}
+                      className="text-[#dfe4ed] font-bold text-xl sm:text-2xl mt-8 mb-4"
+                    >
+                      {headerMatch[1]}
+                    </h2>
+                  )
+                }
+
+                return (
+                  <p
+                    key={index}
+                    className="text-[#dfe4ed] leading-relaxed mb-6 last:mb-0 text-base sm:text-lg"
+                  >
+                    {line}
+                  </p>
+                )
+              })}
           </div>
         </div>
 
