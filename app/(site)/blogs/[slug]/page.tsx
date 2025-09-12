@@ -120,11 +120,38 @@ export default async function BlogSlug({ params }: Params) {
         </div>
 
         {/* Content */}
-        <div className="bg-[#000b1f]/50 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 border border-[#00050f]/30">
-          <div className="prose prose-sm sm:prose-base md:prose-lg prose-invert max-w-none">
-            <p className="text-[#dfe4ed] leading-relaxed text-base sm:text-lg">
-              {blog.content}
-            </p>
+        <div className="bg-[#000b1f]/50 backdrop-blur-sm rounded-2xl p-8 border border-[#00050f]/30">
+          <div className="prose prose-lg prose-invert max-w-none">
+            {blog.content
+              .replace(/\\n/g, "\n") // convert literal "\n" to real newline
+              .split(/\n+/)          // split into paragraphs
+              .filter((line: string) => line.trim() !== "")
+              .map((line: string, index: number) => {
+                // Detect header wrapped in <header>...</header>
+                const headerMatch = line.trim().match(/^<header>(.*?)<\/header>$/)
+
+                if (headerMatch) {
+                  return (
+                    <h2
+                      key={index}
+                      className="text-[#dfe4ed] font-bold text-xl sm:text-2xl mt-8 mb-4"
+                    >
+                      {headerMatch[1]} {/* only the inside text */}
+                    </h2>
+                  )
+                }
+
+                // Normal paragraph
+                return (
+                  <p
+                    key={index}
+                    className="text-[#dfe4ed] leading-relaxed mb-6 last:mb-0 text-base sm:text-lg"
+                  >
+                    {line}
+                  </p>
+                )
+              })
+              }
           </div>
         </div>
 
