@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     description: "Zainol Amzar is a passionate full stack developer from Malaysia, skilled in coding, UI/UX, and deep learning. Explore his portfolio and journey of growth.",
     images: [
       {
-        url: "/og",
+        url: "https://zainolamzar.my/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Zainol Amzar Portfolio",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     creator: "@zain_coder",
     title: "Zainol Amzar Portfolio | Full Stack Developer | Malaysia",
     description: "Zainol Amzar is a passionate full stack developer from Malaysia, constantly advancing in coding and deep learning. Join his journey of growth.",
-    images: ["/og"],
+    images: ["https://zainolamzar.my/og-image.jpg"],
   },
   icons: '/favicon.ico',
   manifest: "/manifest.json",
