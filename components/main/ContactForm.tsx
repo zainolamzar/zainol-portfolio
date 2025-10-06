@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -47,7 +47,9 @@ export default function ContactForm() {
   // Fetch services list from Supabase
   useEffect(() => {
     const fetchServices = async () => {
-      const { data, error } = await supabase.from("services").select("id, name");
+      const { data, error } = await supabase
+        .from("services")
+        .select("id, name");
       if (error) {
         console.error("Error fetching services:", error.message);
       } else {
@@ -58,55 +60,61 @@ export default function ContactForm() {
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
-
-    setFormData((prev) => {
-      if (name === "phone_number") {
-        return { ...prev, phone_number: value ? Number(value) : undefined };
-      }
-      return { ...prev, [name]: value };
-    });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "phone_number" ? (value ? Number(value) : undefined) : value,
+    }));
   };
 
   const handleDateChange = (date: Date | null) => {
     setDueDate(date);
     setFormData((prev) => ({
       ...prev,
-      due: date ? date.toLocaleDateString("en-GB") : "", // dd-MM-yyyy
+      due: date ? date.toLocaleDateString("en-GB") : "",
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true);
-  setError(null);
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-  try {
-    // Optionally, save to Supabase
-    const { error: supabaseError } = await supabase.from("contacts").insert([formData]);
-    if (supabaseError) throw supabaseError;
+    try {
+      // Save to Supabase
+      const { error: supabaseError } = await supabase
+        .from("contacts")
+        .insert([formData]);
+      if (supabaseError) throw supabaseError;
 
-    // Send email via EmailJS
-    await emailjs.send(
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-      {
-        name: formData.name,
-        service: formData.service,
-      },
-      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-    );
+      // Send email via EmailJS
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          name: formData.name,
+          email: formData.email,
+          service: formData.service,
+          phone_number: formData.phone_number ?? "N/A",
+          telegram_id: formData.telegram_id ?? "N/A",
+          due: formData.due || "N/A",
+          message: formData.message,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
 
-    setSubmitted(true);
-  } catch (err: any) {
-    console.error(err);
-    setError(err.message || "Something went wrong.");
-  } finally {
-    setLoading(false);
-  }
-};
+      setSubmitted(true);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -135,7 +143,9 @@ export default function ContactForm() {
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
             {/* Name */}
             <div>
-              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">Full Name</label>
+              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">
+                Full Name
+              </label>
               <input
                 type="text"
                 name="name"
@@ -150,7 +160,9 @@ export default function ContactForm() {
 
             {/* Email */}
             <div>
-              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">Email Address</label>
+              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">
+                Email Address
+              </label>
               <input
                 type="email"
                 name="email"
@@ -163,9 +175,11 @@ export default function ContactForm() {
               />
             </div>
 
-            {/* Service - Select */}
+            {/* Service */}
             <div>
-              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">Requested Service</label>
+              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">
+                Requested Service
+              </label>
               <select
                 name="service"
                 value={formData.service}
@@ -183,10 +197,12 @@ export default function ContactForm() {
               </select>
             </div>
 
-            {/* Phone + Telegram side by side - Stack on mobile */}
+            {/* Phone + Telegram */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="block text-xs sm:text-sm mb-1 sm:mb-2">Phone Number (Optional)</label>
+                <label className="block text-xs sm:text-sm mb-1 sm:mb-2">
+                  Phone Number (Optional)
+                </label>
                 <input
                   type="number"
                   name="phone_number"
@@ -199,7 +215,9 @@ export default function ContactForm() {
               </div>
 
               <div>
-                <label className="block text-xs sm:text-sm mb-1 sm:mb-2">Telegram ID (Optional)</label>
+                <label className="block text-xs sm:text-sm mb-1 sm:mb-2">
+                  Telegram ID (Optional)
+                </label>
                 <input
                   type="text"
                   name="telegram_id"
@@ -212,9 +230,11 @@ export default function ContactForm() {
               </div>
             </div>
 
-            {/* Date Picker */}
+            {/* Due Date */}
             <div>
-              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">Due Date</label>
+              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">
+                Due Date
+              </label>
               <DatePicker
                 selected={dueDate}
                 onChange={handleDateChange}
@@ -226,7 +246,9 @@ export default function ContactForm() {
 
             {/* Message */}
             <div>
-              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">Message</label>
+              <label className="block text-xs sm:text-sm mb-1 sm:mb-2">
+                Message
+              </label>
               <textarea
                 name="message"
                 value={formData.message}
@@ -246,7 +268,7 @@ export default function ContactForm() {
               </div>
             )}
 
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
@@ -259,7 +281,7 @@ export default function ContactForm() {
               {loading ? "Submitting..." : "Submit Request"}
             </button>
 
-            {/* Footer Note */}
+            {/* Footer */}
             <p className="text-xs text-center mt-4 sm:mt-6 text-gray-400 leading-relaxed px-2">
               Kindly allow a few business days for us to review your request.
               We will reach out to you at the earliest opportunity.
