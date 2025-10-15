@@ -1,0 +1,35 @@
+# Dependencies
+node_modules
+
+# Next build output
+.next
+out
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Env files
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+*.swp
+.idea
+.vscode
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile*
+.dockerignore
+
+# Others
+coverage
+*.tsbuildinfo
+.vercel
